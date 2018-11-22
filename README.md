@@ -20,6 +20,8 @@ Currently the following information will be converted:
 # Usage
 - make sure you have Python3 installed
 - clone this repo
-- make sure this script and the target .csv file are in the same directory
-- open a console and type, while replacing contacts.csv with the actual name of the target file: "python converter.py -in contacts.csv"
-- if everthing worked you can see a new file named "contacts.vcf" in the same directory,
+- call the main method via the commandline
+- if no args are provided the gui will appear
+- if you do not want a gui, just pass the following args, replacing <contacts> with the acutal names
+- -in <contacts>.csv
+- -out <contacts>.vcf

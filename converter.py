@@ -96,12 +96,3 @@ def write_website(file, url):
 
 def end_card(file):
     file.write("END:VCARD\n")
-
-
-parser = argparse.ArgumentParser(description="Convert CSV to VCF")
-parser.add_argument('-in', dest='file', help='Input File Name', required=True)
-parser.add_argument('-out', dest='out', help='Output Path for VCF', default='contacts.vcf')
-args = parser.parse_args()
-
-c = Converter(args.file, args.out)
-c.convert()

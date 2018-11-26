@@ -4,6 +4,7 @@ import sys
 from tkinter import messagebox
 from tkinter.filedialog import askopenfile, asksaveasfile
 from converter import *
+import argparse
 
 global file_in, file_out
 

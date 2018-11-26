@@ -1,6 +1,4 @@
 import csv
-import datetime
-import argparse
 
 
 class Converter:
@@ -15,11 +13,18 @@ class Converter:
             with open(self.file, 'r') as inf:
                 with open(self.out, 'w') as outf:
                     data = csv.DictReader(inf)
+                    check_header(next(data))
                     for line in data:
                         write_line(outf, line)
         except FileNotFoundError:
             print("The specified input file %s does not exist" % self.file)
         print("Conversion successful!")
+
+
+def check_header(header):
+    if "First Name" in header:
+        return 1
+    exit("Unsupported CSV Format!")
 
 
 def write_line(file, line):
@@ -51,8 +56,7 @@ def write_name(file, first_name, last_name):
 
 def write_birthday(file, bday):
     if len(bday) > 1:
-        bday = datetime.datetime.strptime(bday, "%d.%M.%Y")
-        file.write("BDAY:" + bday.strftime('%Y-%M-%d') + "\n")
+        file.write("BDAY:" + bday + "\n")
 
 
 def write_phone_mobile(file, num):
@@ -81,7 +85,7 @@ def write_mail(file, mail_home, mail_mobile, mail_work):
 
 def write_addr_home(file, addr):
     if addr:
-        file.write("ADR;TYPE=HOME:;;"+ addr + "\n")
+        file.write("ADR;TYPE=HOME:;;" + addr + "\n")
 
 
 def write_addr_business(file, addr):

@@ -8,6 +8,8 @@ This script is handy if you need to transfer contacts from a phone running windo
 I assume no liability for the use of my program. Use at your own Risk. Data loss or corrupted data can occur.
 If you find a bug or want to contribute new features, feel free to create a pull request.
 
+ONLY OUTLOOK FORMATTED CSV´S SUPPORTED!!
+
 Currently the following information will be converted:
 - Name (Firstname, Lastname)
 - Birthday

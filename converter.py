@@ -18,7 +18,9 @@ class Converter:
                         write_line(outf, line)
         except FileNotFoundError:
             print("The specified input file %s does not exist" % self.file)
+            return False, "File not found"
         print("Conversion successful!")
+        return True, ""
 
 
 def check_header(header):
@@ -29,16 +31,16 @@ def check_header(header):
 
 def write_line(file, line):
     init_card(file)
-    write_name(file, line['First Name'], line['Last Name'])
-    write_birthday(file, line['Birthday'])
-    write_phone_mobile(file, line['Mobile Phone'])
-    write_phone_home(file, line['Home Phone'])
-    write_phone_work(file, line['Business Phone'])
-    write_mail(file, line['E-mail Address'], line['E-mail 2 Address'], line['E-mail 3 Address'])
-    write_addr_home(file, line['Home Address'])
-    write_addr_business(file, line['Business Address'])
+    write_name(file, line.get("First Name", ""), line.get("Last Name", ""))
+    write_birthday(file, line.get("Birthday"))
+    write_phone_mobile(file, line.get("Mobile Phone"))
+    write_phone_home(file, line.get("Home Phone"))
+    write_phone_work(file, line.get("Business Phone"))
+    write_mail(file, line.get("E-mail Address"), line.get("E-mail 2 Address"), line.get("E-mail 3 Address"), )
+    write_addr_home(file, line.get("Home Address"))
+    write_addr_business(file, line.get("Business Address"))
     # write_addr(file)
-    write_website(file, line['Web Page'])
+    write_website(file, line.get("Web Page"))
     end_card(file)
 
 
@@ -48,14 +50,12 @@ def init_card(file):
 
 
 def write_name(file, first_name, last_name):
-    if first_name:
-        file.write("N:" + last_name + ";" + first_name + ";;;" + "\n")
-    if last_name:
-        file.write("FN:" + first_name + " " + last_name + "\n")
+    file.write("N:" + last_name + ";" + first_name + ";;;" + "\n")
+    file.write("FN:" + first_name + " " + last_name + "\n")
 
 
 def write_birthday(file, bday):
-    if len(bday) > 1:
+    if bday:
         file.write("BDAY:" + bday + "\n")
 
 

@@ -6,7 +6,7 @@ from tkinter.filedialog import askopenfile, asksaveasfile
 from converter import *
 import argparse
 
-global file_in, file_out
+file_in, file_out = None, None
 
 
 def open_file():
@@ -32,10 +32,18 @@ def output_location():
 
 
 def convert():
-    global file_in, file_out
+    if not file_in or not file_out:
+        messagebox.showwarning("ERROR", "The following File is missing {}".format(
+            "Input-CSV-File" if not file_in else "Output-CSV-File"))
+
     c = Converter(file_in, file_out)
-    c.convert()
-    messagebox.showinfo("Conversion successful", "Successfully converted the CSV!")
+    success = c.convert()
+
+    if success[0]:
+        messagebox.showinfo("Conversion successful", "Successfully converted the CSV!")
+    else:
+        messagebox.showwarning("ERROR",
+                               "Conversion aborted, because of the following error: {error}".format(error=success[1]))
 
 
 if __name__ == "__main__":
@@ -57,6 +65,7 @@ if __name__ == "__main__":
     # gui
     else:
         root = tk.Tk()
+        root.title("Outlook CSV Converter")
         root.geometry("400x400")
         frame = tk.Frame(root).pack()
 
